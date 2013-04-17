@@ -12,28 +12,75 @@ import play.db.ebean.Model;
 public class Student extends Model {
 
   private static final long serialVersionUID = 115042688639203760L;
-  
+
   @Id
-  public long id;
-  public String studName;
-  public String email;
-  
-  @OneToMany(mappedBy="student", cascade = CascadeType.ALL)
-  public List<Request> requests = new ArrayList<> ();
-  
-  @OneToMany(mappedBy="student", cascade = CascadeType.ALL)
-  public List<Offer> offers = new ArrayList<> ();
-  
-  public Student (String studName, String email) {
+  private long primaryKey;
+  private String studentId;
+  private String studName;
+  private String email;
+
+  @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+  private List<Request> requests = new ArrayList<>();
+
+  @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+  private List<Offer> offers = new ArrayList<>();
+
+  public Student(String studentId, String studName, String email) {
+    this.studentId = studentId;
     this.studName = studName;
     this.email = email;
   }
-  
-  public static Finder<Long, Student> find () {
-    return new Finder<Long, Student> (Long.class, Student.class);
+
+  public static Finder<Long, Student> find() {
+    return new Finder<Long, Student>(Long.class, Student.class);
   }
-  
-  public List<Request> getRequests () {
-    return this.requests;
+
+  public long getPrimaryKey() {
+    return primaryKey;
   }
+
+  public void setPrimaryKey(long primaryKey) {
+    this.primaryKey = primaryKey;
+  }
+
+  public String getStudentId() {
+    return studentId;
+  }
+
+  public void setStudentId(String studentId) {
+    this.studentId = studentId;
+  }
+
+  public String getStudName() {
+    return studName;
+  }
+
+  public void setStudName(String studName) {
+    this.studName = studName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public List<Request> getRequests() {
+    return requests;
+  }
+
+  public void setRequests(List<Request> requests) {
+    this.requests = requests;
+  }
+
+  public List<Offer> getOffers() {
+    return offers;
+  }
+
+  public void setOffers(List<Offer> offers) {
+    this.offers = offers;
+  }
+
 }

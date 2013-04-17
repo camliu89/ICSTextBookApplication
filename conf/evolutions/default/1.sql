@@ -4,37 +4,41 @@
 # --- !Ups
 
 create table book (
-  id                        bigint not null,
+  primary_key               bigint not null,
+  book_id                   varchar(255),
   book_name                 varchar(255),
   isbn                      varchar(255),
   edition                   integer,
   default_price             double,
-  constraint pk_book primary key (id))
+  constraint pk_book primary key (primary_key))
 ;
 
 create table offer (
-  id                        bigint not null,
+  primary_key               bigint not null,
+  offer_id                  varchar(255),
   condition                 varchar(255),
   offer_price               double,
-  book_id                   bigint,
-  student_id                bigint,
-  constraint pk_offer primary key (id))
+  book_primary_key          bigint,
+  student_primary_key       bigint,
+  constraint pk_offer primary key (primary_key))
 ;
 
 create table request (
-  id                        bigint not null,
+  primary_key               bigint not null,
+  request_id                varchar(255),
   condition                 varchar(255),
   offer_price               double,
-  book_id                   bigint,
-  student_id                bigint,
-  constraint pk_request primary key (id))
+  book_primary_key          bigint,
+  student_primary_key       bigint,
+  constraint pk_request primary key (primary_key))
 ;
 
 create table student (
-  id                        bigint not null,
+  primary_key               bigint not null,
+  student_id                varchar(255),
   stud_name                 varchar(255),
   email                     varchar(255),
-  constraint pk_student primary key (id))
+  constraint pk_student primary key (primary_key))
 ;
 
 create sequence book_seq;
@@ -45,14 +49,14 @@ create sequence request_seq;
 
 create sequence student_seq;
 
-alter table offer add constraint fk_offer_book_1 foreign key (book_id) references book (id) on delete restrict on update restrict;
-create index ix_offer_book_1 on offer (book_id);
-alter table offer add constraint fk_offer_student_2 foreign key (student_id) references student (id) on delete restrict on update restrict;
-create index ix_offer_student_2 on offer (student_id);
-alter table request add constraint fk_request_book_3 foreign key (book_id) references book (id) on delete restrict on update restrict;
-create index ix_request_book_3 on request (book_id);
-alter table request add constraint fk_request_student_4 foreign key (student_id) references student (id) on delete restrict on update restrict;
-create index ix_request_student_4 on request (student_id);
+alter table offer add constraint fk_offer_book_1 foreign key (book_primary_key) references book (primary_key) on delete restrict on update restrict;
+create index ix_offer_book_1 on offer (book_primary_key);
+alter table offer add constraint fk_offer_student_2 foreign key (student_primary_key) references student (primary_key) on delete restrict on update restrict;
+create index ix_offer_student_2 on offer (student_primary_key);
+alter table request add constraint fk_request_book_3 foreign key (book_primary_key) references book (primary_key) on delete restrict on update restrict;
+create index ix_request_book_3 on request (book_primary_key);
+alter table request add constraint fk_request_student_4 foreign key (student_primary_key) references student (primary_key) on delete restrict on update restrict;
+create index ix_request_student_4 on request (student_primary_key);
 
 
 

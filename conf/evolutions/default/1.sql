@@ -27,7 +27,7 @@ create table request (
   primary_key               bigint not null,
   request_id                varchar(255),
   condition                 varchar(255),
-  offer_price               double,
+  request_price             double,
   book_primary_key          bigint,
   student_primary_key       bigint,
   constraint pk_request primary key (primary_key))

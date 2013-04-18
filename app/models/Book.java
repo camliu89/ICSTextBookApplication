@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -15,11 +16,14 @@ public class Book extends Model {
 
   @Id
   private Long primaryKey;
+  @Required
   private String bookId;
+  @Required
   private String bookName;
   private String isbn;
-  private int edition;
-  private double defaultPrice;
+  private Integer edition;
+  @Required
+  private Double defaultPrice;
 
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   private List<Offer> offers = new ArrayList<>();
@@ -27,7 +31,7 @@ public class Book extends Model {
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   private List<Request> requests = new ArrayList<>();
 
-  public Book(String bookId, String bookName, String isbn, int edition, double defaultPrice) {
+  public Book(String bookId, String bookName, String isbn, Integer edition, Double defaultPrice) {
     this.bookId = bookId;
     this.bookName = bookName;
     this.isbn = isbn;
@@ -75,15 +79,15 @@ public class Book extends Model {
     return edition;
   }
 
-  public void setEdition(int edition) {
+  public void setEdition(Integer edition) {
     this.edition = edition;
   }
 
-  public double getDefaultPrice() {
+  public Double getDefaultPrice() {
     return defaultPrice;
   }
 
-  public void setDefaultPrice(double defaultPrice) {
+  public void setDefaultPrice(Double defaultPrice) {
     this.defaultPrice = defaultPrice;
   }
 
@@ -101,6 +105,12 @@ public class Book extends Model {
 
   public void setRequests(List<Request> requests) {
     this.requests = requests;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[Book %s, %s, %s, %d, %.2f]", this.bookId, this.bookName, this.isbn,
+        this.edition, this.defaultPrice);
   }
 
 }

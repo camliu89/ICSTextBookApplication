@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -13,17 +14,20 @@ public class Offer extends Model {
 
   @Id
   private Long primaryKey;
+  @Required
   private String offerId;
   private String condition;
-  private double offerPrice;
+  @Required
+  private Double offerPrice;
 
+  @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Book book;
-
+  @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Student student;
 
-  public Offer(String offerId, String condition, double offerPrice, Book book, Student student) {
+  public Offer(String offerId, String condition, Double offerPrice, Book book, Student student) {
     this.offerId = offerId;
     this.condition = condition;
     this.offerPrice = offerPrice;
@@ -59,11 +63,11 @@ public class Offer extends Model {
     this.condition = condition;
   }
 
-  public double getOfferPrice() {
+  public Double getOfferPrice() {
     return offerPrice;
   }
 
-  public void setOfferPrice(double offerPrice) {
+  public void setOfferPrice(Double offerPrice) {
     this.offerPrice = offerPrice;
   }
 
@@ -81,6 +85,12 @@ public class Offer extends Model {
 
   public void setStudent(Student student) {
     this.student = student;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[Offer %s, %s, %f, %s, %s]", this.offerId, this.condition,
+        this.offerPrice, this.book.getBookId(), this.student.getStudentId());
   }
 
 }

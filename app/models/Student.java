@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -14,9 +15,12 @@ public class Student extends Model {
   private static final long serialVersionUID = 115042688639203760L;
 
   @Id
-  private long primaryKey;
+  private Long primaryKey;
+  @Required
   private String studentId;
+  @Required
   private String studName;
+  @Required
   private String email;
 
   @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
@@ -35,11 +39,11 @@ public class Student extends Model {
     return new Finder<Long, Student>(Long.class, Student.class);
   }
 
-  public long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return primaryKey;
   }
 
-  public void setPrimaryKey(long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
 
@@ -83,4 +87,8 @@ public class Student extends Model {
     this.offers = offers;
   }
 
+  @Override
+  public String toString() {
+    return String.format("[Student %s %s, $s]", this.studentId, this.studName, this.email);
+  }
 }

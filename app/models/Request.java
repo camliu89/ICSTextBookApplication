@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -13,20 +14,23 @@ public class Request extends Model {
 
   @Id
   private Long primaryKey;
+  @Required
   private String requestId;
   private String condition;
-  private double offerPrice;
+  @Required
+  private Double requestPrice;
 
+  @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Book book;
-
+  @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Student student;
 
-  public Request(String requestId, String condition, double offerPrice, Book book, Student student) {
+  public Request(String requestId, String condition, Double requestPrice, Book book, Student student) {
     this.requestId = requestId;
     this.condition = condition;
-    this.offerPrice = offerPrice;
+    this.requestPrice = requestPrice;
     this.book = book;
     this.student = student;
   }
@@ -59,12 +63,12 @@ public class Request extends Model {
     this.condition = condition;
   }
 
-  public double getOfferPrice() {
-    return offerPrice;
+  public Double getRequestPrice() {
+    return requestPrice;
   }
 
-  public void setOfferPrice(double offerPrice) {
-    this.offerPrice = offerPrice;
+  public void setRequestPrice(Double requestPrice) {
+    this.requestPrice = requestPrice;
   }
 
   public Student getStudent() {
@@ -79,8 +83,14 @@ public class Request extends Model {
     return book;
   }
 
-  public void SetBook(Book book) {
+  public void setBook(Book book) {
     this.book = book;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[Request %s, %s, %f, %s, %s]", this.requestId, this.condition,
+        this.requestPrice, this.book.getBookId(), this.student.getStudentId());
   }
 
 }

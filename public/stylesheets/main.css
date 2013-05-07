@@ -1,0 +1,34 @@
+table {
+  font-family: 'Droid Sans', sans-serif;
+}
+
+.navbar {
+  font-family: 'Droid Sans Mono', sans-serif;
+}
+
+.page-header {
+  font-family:  'Droid Serif', sans-serif;
+}
+
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+img {
+  width: 180px;
+}
+
+div.middle {
+  margin-bottom: 20px;
+  text-align:center;
+}
+
+form button {
+  font-family: 'Droid Sans Mono', sans-serif
+}
+
+hr.line{
+  border-width:3px;
+}

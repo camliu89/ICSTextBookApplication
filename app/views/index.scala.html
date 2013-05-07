@@ -1,7 +1,128 @@
-@(message: String)
+@(studentName : String, offers : List[models.Offer])
 
-@main("Welcome to Play 2.1") {
+@main("Your books") {
     
-    @play20.welcome(message, style = "Java")
+    <!-- Navbar -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">Welcome @studentName</a>
+      <div class="navbar-content">
+        <ul class="nav  pull-right">
+          <li>
+            <a href="#">Show Requests</a> 
+          </li>
+          <li>
+            <a href="#">Show Offers</a> 
+          </li>
+          <li class="active">
+            <a href="#">Your Books</a> 
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Offer table -->
+<div class="container">
+  <h3 class="page-header">Your Offers</h3>
+  <a class="btn action pull-right btn-info btn-small" href="#">Make an Offer</a>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Book</th>
+        <th>Edition</th>
+        <th>Offer Price</th>
+        <th>Condition</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        @for(offer <- offers) {
+             <tr>
+             	<td>@offer.getOfferId()</td>
+             	<td>@offer.getBook().getBookName()</td>
+             	<td>@offer.getBook().getEdition()</td>
+             	<td>@offer.getOfferPrice()</td>
+             	<td>@offer.getCondition()</td>
+             	<td>
+       				<div class="btn-group">
+          			<a class="btn action btn-primary" href="#">Edit</a>
+          			<a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            				<span class="caret"></span>
+          			</a>
+          			<ul class="dropdown-menu">
+            				<li>
+              				<a href="#">Delete</a> 
+            				</li>
+          			</ul>
+       				</div>
+     			</td>
+     		</tr>
+       }
+    </tbody>
+  </table>
+</div>
+<!-- Request table -->
+<div class="container">
+  <h3 class="page-header">Your Requests</h3>
+  <a class="btn action pull-right btn-info btn-small"
+  href="#">Make a Request</a>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Book</th>
+        <th>Edition</th>
+        <th>Offer Price</th>
+        <th>Condition</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Operating Systems</td>
+        <td>1st</td>
+        <td>$12.30</td>
+        <td>Average</td>
+        <td>
+          <div class="btn-group">
+            <a class="btn action btn-primary" href="#">Edit</a>
+            <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Delete</a> 
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Algorithms</td>
+        <td>3rd</td>
+        <td>$7.99</td>
+        <td>Average</td>
+        <td>
+          <div class="btn-group">
+            <a class="btn action btn-primary" href="#">Edit</a>
+            <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Delete</a> 
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
     
 }

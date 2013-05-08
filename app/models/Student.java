@@ -89,6 +89,6 @@ public class Student extends Model {
 
   @Override
   public String toString() {
-    return String.format("[Student %s %s, $s]", this.studentId, this.studName, this.email);
+    return String.format("[Student: %s %s, %s]", this.studentId, this.studName, this.email);
   }
 }

@@ -1,4 +1,4 @@
-@(studentName : String, offers : List[models.Offer])
+@(student : models.Student , offers : List[models.Offer], requests : List[models.Request])
 
 @main("Your books") {
     
@@ -6,7 +6,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Welcome @studentName</a>
+      <a class="brand" href="#">Welcome, @student.getStudName()</a>
       <div class="navbar-content">
         <ul class="nav  pull-right">
           <li>
@@ -26,7 +26,7 @@
 <!-- Offer table -->
 <div class="container">
   <h3 class="page-header">Your Offers</h3>
-  <a class="btn action pull-right btn-info btn-small" href="#">Make an Offer</a>
+  <a class="btn action pull-right btn-info btn-small" href="@routes.Offer.create(student.getStudentId())">Make an Offer</a>
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -44,19 +44,12 @@
              	<td>@offer.getOfferId()</td>
              	<td>@offer.getBook().getBookName()</td>
              	<td>@offer.getBook().getEdition()</td>
-             	<td>@offer.getOfferPrice()</td>
+             	<td>$@offer.getOfferPrice()</td>
              	<td>@offer.getCondition()</td>
              	<td>
        				<div class="btn-group">
-          			<a class="btn action btn-primary" href="#">Edit</a>
-          			<a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-            				<span class="caret"></span>
-          			</a>
-          			<ul class="dropdown-menu">
-            				<li>
-              				<a href="#">Delete</a> 
-            				</li>
-          			</ul>
+          			<a class="btn action btn-primary" href="@routes.Offer.edit(offer.getPrimaryKey())">Edit</a>
+          			<a class="btn action btn-danger" href="@routes.Offer.destroy(offer.getPrimaryKey())">Delete</a>
        				</div>
      			</td>
      		</tr>
@@ -67,60 +60,34 @@
 <!-- Request table -->
 <div class="container">
   <h3 class="page-header">Your Requests</h3>
-  <a class="btn action pull-right btn-info btn-small"
-  href="#">Make a Request</a>
+  <a class="btn action pull-right btn-info btn-small" href="@routes.Request.create(student.getStudentId())">Make a Request</a>
   <table class="table table-condensed">
     <thead>
       <tr>
         <th>#</th>
         <th>Book</th>
         <th>Edition</th>
-        <th>Offer Price</th>
+        <th>Request Price</th>
         <th>Condition</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Operating Systems</td>
-        <td>1st</td>
-        <td>$12.30</td>
-        <td>Average</td>
-        <td>
-          <div class="btn-group">
-            <a class="btn action btn-primary" href="#">Edit</a>
-            <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Delete</a> 
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Algorithms</td>
-        <td>3rd</td>
-        <td>$7.99</td>
-        <td>Average</td>
-        <td>
-          <div class="btn-group">
-            <a class="btn action btn-primary" href="#">Edit</a>
-            <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Delete</a> 
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
+       @for(request <- requests) {
+             <tr>
+             	<td>@request.getRequestId()</td>
+             	<td>@request.getBook().getBookName()</td>
+             	<td>@request.getBook().getEdition()</td>
+             	<td>$@request.getRequestPrice()</td>
+             	<td>@request.getCondition()</td>
+             	<td>
+       				<div class="btn-group">
+          			<a class="btn action btn-primary" href="@routes.Request.edit(request.getPrimaryKey())">Edit</a>
+          			<a class="btn action btn-danger" href="@routes.Request.destroy(request.getPrimaryKey())">Delete</a>
+       				</div>
+     			</td>
+     		</tr>
+       }
     </tbody>
   </table>
 </div>

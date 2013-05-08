@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +16,7 @@ public class Request extends Model {
 
   @Id
   private Long primaryKey;
-  @Required
+
   private String requestId;
   private String condition;
   @Required
@@ -23,7 +25,7 @@ public class Request extends Model {
   @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Book book;
-  @Required
+
   @ManyToOne(cascade = CascadeType.ALL)
   private Student student;
 
@@ -91,6 +93,15 @@ public class Request extends Model {
   public String toString() {
     return String.format("[Request %s, %s, %f, %s, %s]", this.requestId, this.condition,
         this.requestPrice, this.book.getBookId(), this.student.getStudentId());
+  }
+
+  public static List<String> getConditions() {
+    List<String> conditions = new ArrayList<>();
+    conditions.add("Excellent");
+    conditions.add("Good");
+    conditions.add("Average");
+    conditions.add("Bad");
+    return conditions;
   }
 
 }

@@ -1,9 +1,13 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -14,7 +18,6 @@ public class Offer extends Model {
 
   @Id
   private Long primaryKey;
-  @Required
   private String offerId;
   private String condition;
   @Required
@@ -23,7 +26,7 @@ public class Offer extends Model {
   @Required
   @ManyToOne(cascade = CascadeType.ALL)
   private Book book;
-  @Required
+  
   @ManyToOne(cascade = CascadeType.ALL)
   private Student student;
 
@@ -33,6 +36,10 @@ public class Offer extends Model {
     this.offerPrice = offerPrice;
     this.book = book;
     this.student = student;
+  }
+  
+  public Offer (String offerId) {
+	  this.offerId = offerId;
   }
 
   public static Finder<Long, Offer> find() {
@@ -92,5 +99,14 @@ public class Offer extends Model {
     return String.format("[Offer %s, %s, %f, %s, %s]", this.offerId, this.condition,
         this.offerPrice, this.book.getBookId(), this.student.getStudentId());
   }
+  
+  public static List<String> getConditions() {
+	    List<String> conditions = new ArrayList<>();
+	    conditions.add("Excellent");
+	    conditions.add("Good");
+	    conditions.add("Average");
+	    conditions.add("Bad");
+	    return conditions;
+	  }
 
 }

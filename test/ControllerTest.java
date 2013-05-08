@@ -117,7 +117,7 @@ public class ControllerTest {
     offerData.put("offerId", "Offer-02");
     offerData.put("condition", "good");
     offerData.put("offerPrice", "13.50");
-    offerData.put("book", book2.getBookId());
+    offerData.put("book", book2.getBookName());
     offerData.put("student", student2.getStudentId());
     book2.save();
     student2.save();

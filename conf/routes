@@ -12,10 +12,24 @@ POST	/students                   controllers.Student.newStudent()
 DELETE	/students/:studentId        controllers.Student.delete(studentId: String)
 
 #Offers
+GET     /offer/create               controllers.Offer.create(studentId: String)
+POST    /offer                      controllers.Offer.save(studentId: String)
+GET     /offer/:primaryKey          controllers.Offer.edit(primaryKey: Long)
+POST    /offer/:primaryKey          controllers.Offer.update(primaryKey: Long)
+GET     /offer/:primaryKey/destroy  controllers.Offer.destroy(primaryKey: Long)
+
+#Offers for testing
 GET 	/offers                     controllers.Offer.index()
 GET 	/offers/:offerId            controllers.Offer.details(offerId: String)
 POST	/offers                     controllers.Offer.newOffer()
 DELETE	/offers/:offerId            controllers.Offer.delete(offerId: String)
+
+#Requests
+GET     /request/create               controllers.Request.create(studentId: String)
+POST    /request                      controllers.Request.save(studentId: String)
+GET     /request/:primaryKey          controllers.Request.edit(primaryKey: Long)
+POST    /request/:primaryKey          controllers.Request.update(primaryKey: Long)
+GET     /request/:primaryKey/destroy  controllers.Request.destroy(primaryKey: Long)
 
 #Requests
 GET 	/requests                   controllers.Request.index()

@@ -112,5 +112,13 @@ public class Book extends Model {
     return String.format("[Book %s, %s, %s, %d, %.2f]", this.bookId, this.bookName, this.isbn,
         this.edition, this.defaultPrice);
   }
+  
+  public static List<String> getNames() {
+	    List<String> bookNames = new ArrayList<>();
+	    for (Book book : find().all()) {
+	      bookNames.add(book.getBookName());
+	    }
+	    return bookNames;
+	  }
 
 }

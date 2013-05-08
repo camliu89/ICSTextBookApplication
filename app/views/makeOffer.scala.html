@@ -1,0 +1,25 @@
+@(studentId: String, offerForm: Form[models.Offer])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Make an Offer") {
+
+	<div class="container">
+  		<h3 class="page-header">Make an Offer</h3>
+	</div>
+	<div class="container">
+	@form(routes.Offer.save(studentId), 'class -> "form-horizontal") {
+      @select(offerForm("Book"), options = options(models.Book.getNames()), '_default -> "Choose a Book", '_label -> "Book")
+      @select(offerForm("condition"), options = options(models.Offer.getConditions()), '_default -> "Choose a book condition", '_label -> "Condition")
+      @inputText(offerForm("offerPrice"), '_label -> "Offer Price")    
+      <div class="control-group">
+        <div class="controls">    
+          <input id="create" type="submit" value="Done" class="btn btn-primary"> 
+          <a href="@routes.Application.index()" class="btn">Cancel</a> 
+        </div>
+      </div>
+    }  
+	</div> 
+}
+

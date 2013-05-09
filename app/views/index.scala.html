@@ -26,7 +26,7 @@
 <!-- Offer table -->
 <div class="container">
   <h3 class="page-header">Your Offers</h3>
-  <a class="btn action pull-right btn-info btn-small" href="@routes.Offer.create(student.getStudentId())">Make an Offer</a>
+  <a id="makeOffer" class="btn action pull-right btn-info btn-small" href="@routes.Offer.create(student.getStudentId())">Make an Offer</a>
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -48,8 +48,8 @@
              	<td>@offer.getCondition()</td>
              	<td>
        				<div class="btn-group">
-          			<a class="btn action btn-primary" href="@routes.Offer.edit(offer.getPrimaryKey())">Edit</a>
-          			<a class="btn action btn-danger" href="@routes.Offer.destroy(offer.getPrimaryKey())">Delete</a>
+          			<a id="editOffer" class="btn action btn-primary" href="@routes.Offer.edit(offer.getPrimaryKey())">Edit</a>
+          			<a id="deleteOffer" class="btn action btn-danger" href="@routes.Offer.destroy(offer.getPrimaryKey())">Delete</a>
        				</div>
      			</td>
      		</tr>
@@ -60,7 +60,7 @@
 <!-- Request table -->
 <div class="container">
   <h3 class="page-header">Your Requests</h3>
-  <a class="btn action pull-right btn-info btn-small" href="@routes.Request.create(student.getStudentId())">Make a Request</a>
+  <a id="makeRequest" class="btn action pull-right btn-info btn-small" href="@routes.Request.create(student.getStudentId())">Make a Request</a>
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -82,8 +82,8 @@
              	<td>@request.getCondition()</td>
              	<td>
        				<div class="btn-group">
-          			<a class="btn action btn-primary" href="@routes.Request.edit(request.getPrimaryKey())">Edit</a>
-          			<a class="btn action btn-danger" href="@routes.Request.destroy(request.getPrimaryKey())">Delete</a>
+          			<a id="editRequest" class="btn action btn-primary" href="@routes.Request.edit(request.getPrimaryKey())">Edit</a>
+          			<a id="deleteRequest" class="btn action btn-danger" href="@routes.Request.destroy(request.getPrimaryKey())">Delete</a>
        				</div>
      			</td>
      		</tr>

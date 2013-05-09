@@ -6,11 +6,15 @@ import models.Book;
 import models.Offer;
 import models.Request;
 import play.mvc.*;
-import views.html.index;;
+import views.html.index;
+
+;
 
 public class Application extends Controller {
 
   public static Result index() {
+    // For development purpose, create programatically a student and some books the first time the
+    // user hits the home page.
     if (Student.find().all().size() <= 0) {
       Student student = new Student("Student-1", "John Smith", "smith@hawaii.edu");
       student.save();
